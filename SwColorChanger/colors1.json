@@ -1,0 +1,20 @@
+﻿{
+  "0,94,115": {
+    "$randSat": {
+      "base": "0,94,115",
+      "deviation" : 50
+    }
+  },
+  "000000": {
+    "$randSat": {
+      "base": "f1dfd4",
+      "deviation" : 50
+    }
+  },
+  "515C4c": {
+    "$randSat": {
+      "base": "515C4C",
+      "deviation": 50
+    }
+  }
+}
