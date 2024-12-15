@@ -16,7 +16,6 @@ public static class ColorHelpers
       if (str.Contains(','))
       {
          var rgb = str.Split(',').Select(int.Parse).ToArray();
-         Debug.Assert(rgb.Length == 3);
          var color = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
          return color;
       }

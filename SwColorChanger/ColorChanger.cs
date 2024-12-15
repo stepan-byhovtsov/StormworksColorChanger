@@ -15,16 +15,10 @@ public static class ColorChanger
          foreach (XmlElement component in components)
          {
             var obj = component["o"]!;
-            var ac = NormalizeColor(obj.Attributes["ac"]?.Value);
-            var bc = NormalizeColor(obj.Attributes["bc"]?.Value);
-            if (colorMap.TryGetValue(ac, out var replacementAc))
-            {
-               obj.SetAttribute("ac", replacementAc.Render());
-            }
-            if (colorMap.TryGetValue(bc, out var replacementBc))
-            {
-               obj.SetAttribute("bc", replacementBc.Render());
-            }
+            UpdateTag(colorMap, obj, "ac");
+            UpdateTag(colorMap, obj, "bc");
+            UpdateTag(colorMap, obj, "bc2");
+            UpdateTag(colorMap, obj, "bc3");
 
             var sc = obj.Attributes["sc"];
             if (sc != null)
@@ -32,6 +26,23 @@ public static class ColorChanger
                var colors = sc.Value.Split(',');
                if (colors.Length > 1)
                {
+                   
+                  // [0] = count of colors
+                  for (int i = 1; i < colors.Length; i++)
+                  {
+                     var color = NormalizeColor(colors[i]);
+                     if (colorMap.TryGetValue(color, out var replacementSc))
+                     {
+                        colors[i] = DenormalizeColor(replacementSc.Render());
+                     }
+                  }
+
+                  var newValue = string.Join(',', colors);
+                  sc.Value = newValue;
+               }
+               else
+               {
+                  Array.Resize(ref colors, int.Parse(colors[0])+1);
                   // [0] = count of colors
                   for (int i = 1; i < colors.Length; i++)
                   {
@@ -68,6 +79,15 @@ public static class ColorChanger
             }
          }
       }      
+   }
+
+   static void UpdateTag(Dictionary<string, IColor> colorMap, XmlElement obj, string attr)
+   {
+      var ac = NormalizeColor(obj.Attributes[attr]?.Value);
+      if (colorMap.TryGetValue(ac, out var replacementAc))
+      {
+         obj.SetAttribute(attr, replacementAc.Render());
+      }
    }
    
    
