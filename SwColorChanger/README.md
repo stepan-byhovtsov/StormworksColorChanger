@@ -15,7 +15,7 @@
       "deviation" : 50
     }
   },
-  "000000": {
+  "FFFFFF": {
     "$randSat": {
       "base": "f1dfd4",
       "deviation" : 50
