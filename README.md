@@ -1,0 +1,1 @@
+See SwColorChanger/README.md
