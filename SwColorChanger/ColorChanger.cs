@@ -75,12 +75,12 @@ public static class ColorChanger
    {
       if (color == null)
       {
-         return "0";
+         return "FFFFFF";
       }
    
       if (color == "x")
       {
-         return "0";
+         return "FFFFFF";
       }
 
       return color;
@@ -89,6 +89,6 @@ public static class ColorChanger
    static string DenormalizeColor(string color)
    {
       color = color.TrimStart('0');
-      return color.Length == 0 ? "x" : color;
+      return color == "FFFFFF" ? "x" : color;
    }
 }
