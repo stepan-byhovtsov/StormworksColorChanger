@@ -41,7 +41,7 @@ Values can be either constant color or a special macros.
 #### Constant color syntax:
 `"RRGGBB":"rrggbb"` * Note: You can also use second color syntax: `"RRGGBB":"r,g,b"`
 
-#### Random saturation macros
+#### Random saturation operator
 ```json
   "[color to replace]" : {
     "$randSat": {
@@ -50,4 +50,27 @@ Values can be either constant color or a special macros.
     }
   }
 ```
-For each replaced color occurence, generates a random color with same hue and value as a base color and a random saturation in range [base saturation - deviation; base saturation + deviation].
+
+#### Random from set operator
+```json
+"255,255,255": {
+    "$randFrom": [
+      {
+        "//": "Probability will be calculated automatically",
+        "$randSat": {
+          "base": "227, 224, 232", "//": "SnowColor",
+          "deviation": 50
+        }
+      },
+      {
+        "probability": 0.25, "//": "Amount of color",
+        "$randSat": {
+          "base": "49, 63, 11", "//": "DarkPineColor",
+          "deviation": 50
+        }
+      }
+    ]
+  }
+```
+
+For each replaced color occurence, selects and generates a random color from a provided set.
