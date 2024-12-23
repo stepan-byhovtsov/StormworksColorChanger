@@ -11,7 +11,7 @@
       <None Update="testcolors.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="arctic.json">
+      <None Update="Camo\snowyForest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

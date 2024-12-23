@@ -1,6 +1,6 @@
 ﻿using SwColorChanger;
 
-var colorMap = ColorMap.ImportColorMap();
+var colorMap = ColorMap.ImportColorMap(out var colorMapName);
 try
 {
    var saveName = VehicleFile.AskForSaveName(args);
@@ -9,7 +9,7 @@ try
    try
    {
       ColorChanger.RecolorXmlDocument(xmlDocument, colorMap);
-      VehicleFile.SaveXmlDocument(xmlDocument, saveName + "_rc");
+      VehicleFile.SaveXmlDocument(xmlDocument, saveName + "_rc_" + colorMapName);
       Console.WriteLine("Successfully recolored.");
       WaitForExit();
       return 0;

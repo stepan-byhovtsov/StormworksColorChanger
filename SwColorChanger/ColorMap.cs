@@ -6,16 +6,18 @@ namespace SwColorChanger;
 
 public static class ColorMap
 {
-   public static Dictionary<string, IColor> ImportColorMap()
+   public static Dictionary<string, IColor> ImportColorMap(out string colorMapName)
    {
       var name = "colors";
       var jsonSerializerOptions = new JsonSerializerOptions {Converters = {new JsonColorConverter()}};
       Dictionary<string, IColor>? colorMap = null;
-      while (colorMap == null)
+      FileInfo? file = null;
+      while (colorMap == null || file == null)
       {
+         file = new FileInfo($"{name}.json");
          try
          {
-            colorMap = JsonSerializer.Deserialize<Dictionary<string, IColor>>(File.ReadAllText($"{name}.json"),
+            colorMap = JsonSerializer.Deserialize<Dictionary<string, IColor>>(File.ReadAllText(file.FullName),
                jsonSerializerOptions);
          }
          catch (FileNotFoundException)
@@ -29,6 +31,8 @@ public static class ColorMap
             name = Console.ReadLine()!;
          }
       }
+
+      colorMapName = Path.GetFileNameWithoutExtension(file.Name);
       return colorMap.Select(kv => new KeyValuePair<string, IColor>(ColorHelpers.ToUnifiedColor(kv.Key), kv.Value)).ToDictionary();
    } 
 }
