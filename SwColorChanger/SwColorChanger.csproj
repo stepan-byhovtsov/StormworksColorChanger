@@ -8,7 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="colors.json">
+      <None Update="testcolors.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="arctic.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

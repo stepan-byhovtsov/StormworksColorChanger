@@ -15,6 +15,9 @@ public static class ColorChanger
          foreach (XmlElement component in components)
          {
             var obj = component["o"]!;
+
+            var baseColor = obj.Attributes["bc"]?.Value;
+            
             UpdateTag(colorMap, obj, "ac");
             UpdateTag(colorMap, obj, "bc");
             UpdateTag(colorMap, obj, "bc2");
@@ -23,7 +26,7 @@ public static class ColorChanger
             var sc = obj.Attributes["sc"];
             if (sc != null)
             {
-               var colors = sc.Value.Split(',');
+               string?[] colors = sc.Value.Split(',');
                if (colors.Length > 1)
                {
                    
@@ -46,7 +49,7 @@ public static class ColorChanger
                   // [0] = count of colors
                   for (int i = 1; i < colors.Length; i++)
                   {
-                     var color = NormalizeColor(colors[i]);
+                     var color = NormalizeColor(colors[i] ?? baseColor);
                      if (colorMap.TryGetValue(color, out var replacementSc))
                      {
                         colors[i] = DenormalizeColor(replacementSc.Render());

@@ -16,5 +16,21 @@
       "base": "515C4C",
       "deviation": 50
     }
+  },
+  "189,144,96": {
+    "$randFrom": [
+      {
+        "$randSat": {
+          "base": "91, 102, 69",
+          "deviation": 50
+        }
+      },
+      {
+        "$randSat": {
+          "base": "242, 236, 233",
+          "deviation": 50
+        }
+      }
+    ]
   }
 }
