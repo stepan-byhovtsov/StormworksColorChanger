@@ -7,13 +7,6 @@
           "base": "227, 224, 232", "//": "SnowColor",
           "deviation": 50
         }
-      },
-      {
-        "probability": 0.4, "//": "Amount of color",
-        "$randSat": {
-          "base": "49, 63, 11", "//": "DarkPineColor",
-          "deviation": 50
-        }
       }
     ]
   }

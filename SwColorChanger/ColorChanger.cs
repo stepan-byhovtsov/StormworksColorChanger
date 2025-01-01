@@ -16,12 +16,14 @@ public static class ColorChanger
          {
             var obj = component["o"]!;
 
+            var comp = new ComponentDescription(component);
+
             var baseColor = obj.Attributes["bc"]?.Value;
-            
-            UpdateTag(colorMap, obj, "ac");
-            UpdateTag(colorMap, obj, "bc");
-            UpdateTag(colorMap, obj, "bc2");
-            UpdateTag(colorMap, obj, "bc3");
+
+            UpdateTag(colorMap, obj, "ac", comp);
+            UpdateTag(colorMap, obj, "bc", comp);
+            UpdateTag(colorMap, obj, "bc2", comp);
+            UpdateTag(colorMap, obj, "bc3", comp);
 
             var sc = obj.Attributes["sc"];
             if (sc != null)
@@ -29,14 +31,13 @@ public static class ColorChanger
                string?[] colors = sc.Value.Split(',');
                if (colors.Length > 1)
                {
-                   
                   // [0] = count of colors
                   for (int i = 1; i < colors.Length; i++)
                   {
                      var color = NormalizeColor(colors[i]);
                      if (colorMap.TryGetValue(color, out var replacementSc))
                      {
-                        colors[i] = DenormalizeColor(replacementSc.Render());
+                        colors[i] = DenormalizeColor(replacementSc.Render(comp));
                      }
                   }
 
@@ -45,22 +46,21 @@ public static class ColorChanger
                }
                else
                {
-                  Array.Resize(ref colors, int.Parse(colors[0])+1);
-                  // [0] = count of colors
-                  for (int i = 1; i < colors.Length; i++)
+                  Array.Resize(ref colors, int.Parse(colors[0]!) + 1);
+                  var color = NormalizeColor(baseColor);
+                  if (colorMap.TryGetValue(color, out var replacementSc))
                   {
-                     var color = NormalizeColor(colors[i] ?? baseColor);
-                     if (colorMap.TryGetValue(color, out var replacementSc))
+                     for (int i = 1; i < colors.Length; i++)
                      {
-                        colors[i] = DenormalizeColor(replacementSc.Render());
+                        colors[i] = DenormalizeColor(replacementSc.Render(comp));
                      }
+                     
+                     var newValue = string.Join(',', colors);
+                     sc.Value = newValue;
                   }
-
-                  var newValue = string.Join(',', colors);
-                  sc.Value = newValue;
                }
             }
-            
+
             var gc = obj.Attributes["gc"];
             if (gc != null)
             {
@@ -72,7 +72,7 @@ public static class ColorChanger
                      var color = NormalizeColor(colors[i]);
                      if (colorMap.TryGetValue(color, out var replacementSc))
                      {
-                        colors[i] = DenormalizeColor(replacementSc.Render());
+                        colors[i] = DenormalizeColor(replacementSc.Render(comp));
                      }
                   }
 
@@ -81,26 +81,26 @@ public static class ColorChanger
                }
             }
          }
-      }      
+      }
    }
 
-   static void UpdateTag(Dictionary<string, IColor> colorMap, XmlElement obj, string attr)
+   static void UpdateTag(Dictionary<string, IColor> colorMap, XmlElement obj, string attr, ComponentDescription comp)
    {
       var ac = NormalizeColor(obj.Attributes[attr]?.Value);
       if (colorMap.TryGetValue(ac, out var replacementAc))
       {
-         obj.SetAttribute(attr, replacementAc.Render());
+         obj.SetAttribute(attr, replacementAc.Render(comp));
       }
    }
-   
-   
+
+
    static string NormalizeColor(string? color)
    {
       if (color == null)
       {
          return "FFFFFF";
       }
-   
+
       if (color == "x")
       {
          return "FFFFFF";

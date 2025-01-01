@@ -1,0 +1,19 @@
+﻿{
+  "FFFFFF": {
+    "$spotty": {
+      "base": "189, 144, 96",
+      "spots": [
+        {
+          "density": 80000,
+          "radius": 2,
+          "color": {
+            "$randSat": {
+              "base": "147, 144, 128", "//": "Stone color",
+              "deviation": 50
+            }
+          }
+        }
+      ]
+    }
+  }
+}
