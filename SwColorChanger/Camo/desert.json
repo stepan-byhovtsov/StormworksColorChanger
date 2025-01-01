@@ -1,0 +1,12 @@
+﻿{
+  "FFFFFF": {
+    "$randFrom": [
+      {
+        "$randSat": {
+          "base": "189, 144, 96", "//": "Desert color",
+          "deviation": 50
+        }
+      }
+    ]
+  }
+}

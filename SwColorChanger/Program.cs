@@ -1,9 +1,9 @@
 ﻿using SwColorChanger;
 
 var colorMap = ColorMap.ImportColorMap(out var colorMapName);
+var saveName = VehicleFile.AskForSaveName(args);
 try
 {
-   var saveName = VehicleFile.AskForSaveName(args);
    var xmlDocument = VehicleFile.ImportXmlDocument(saveName);
    
    try
@@ -23,7 +23,7 @@ try
 }
 catch
 {
-   Console.WriteLine($"Cannot open {args[0]} file.");
+   Console.WriteLine($"Cannot open {saveName} file.");
    WaitForExit();
    return 1;
 }

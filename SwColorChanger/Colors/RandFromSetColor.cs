@@ -11,12 +11,16 @@ public class RandFromSetColor : IColor
    {
       var sum = colorSet.Aggregate(0f, (sum, color) => sum + color.probability);
       var cnt = colorSet.Aggregate(0, (cnt, color) => cnt + color.probability > 0f ? 1 : 0);
+      if (cnt == 0)
+      {
+         cnt = colorSet.Length;
+      }
       var avg = (1f - sum) / cnt;
       colorSet = colorSet.Select(c => (c.color, c.probability > 0 ? c.probability : avg)).ToArray();
       ColorSet = colorSet;
    }
    
-   public string Render()
+   public string Render(ComponentDescription c)
    {
       var ind = Random.Shared.NextSingle();
       var cur = 0f;
@@ -25,7 +29,7 @@ public class RandFromSetColor : IColor
          cur += ColorSet[i].probability;
          if (cur > ind)
          {
-            return ColorSet[i].color.Render();
+            return ColorSet[i].color.Render(c);
          }
       }
 

@@ -6,7 +6,7 @@ public class FixedColor : IColor
 {
    public required string Color;
    
-   public string Render()
+   public string Render(ComponentDescription c)
    {
       return ColorHelpers.ToUnifiedColor(Color);
    }

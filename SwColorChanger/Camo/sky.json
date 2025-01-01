@@ -1,0 +1,19 @@
+﻿{
+  "FFFFFF": {
+    "$randFrom": [
+      {
+        "$randSat": {
+          "base": "111, 161, 255", "//": "Sky color",
+          "deviation": 50
+        }
+      },
+      {
+        "probability": 0.15,
+        "$randSat": {
+          "base": "255, 255, 255", "//": "White color",
+          "deviation": 50
+        }
+      }
+    ]
+  }
+}

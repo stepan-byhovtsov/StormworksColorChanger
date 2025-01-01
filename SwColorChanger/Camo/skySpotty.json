@@ -1,0 +1,19 @@
+﻿{
+  "FFFFFF": {
+    "$spotty": {
+      "base": "111, 161, 255",
+      "spots": [
+        {
+          "density": 50000,
+          "radius": 2.5,
+          "color": {
+            "$randSat": {
+              "base": "255, 255, 255",
+              "deviation": 50
+            }
+          }
+        }
+      ]
+    }
+  }
+}

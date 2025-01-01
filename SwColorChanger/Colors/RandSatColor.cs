@@ -8,7 +8,7 @@ public class RandSatColor : IColor
    public required string BaseColor;
    public required int Deviation;
    
-   public string Render()
+   public string Render(ComponentDescription c)
    {
       var color = ColorHelpers.ToColor(BaseColor);
       var deviation = 1 + (Random.Shared.NextSingle() - 0.5f) * (Deviation / 255f);

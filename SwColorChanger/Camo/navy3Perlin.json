@@ -1,0 +1,19 @@
+﻿{
+  "FFFFFF": {
+    "$perlin": {
+      "easing": "expo",
+      "div": 4,
+      "octaves": 1,
+      "a": "136, 148, 166",
+      "b": {
+        "$perlin": {
+          "easing": "expo",
+          "a": "200, 212, 226",
+          "b": "84, 84, 90",
+          "octaves": 16,
+          "div": 8
+        }
+      }
+    }
+  }
+}
